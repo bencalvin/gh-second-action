@@ -2,6 +2,7 @@ name: Deploy Project
 on: push
 jobs:
   test:
+    concurrency: deploy
     runs-on: ubuntu-latest
     steps:        
         - name: Get Code
@@ -14,8 +15,7 @@ jobs:
           run: npm ci
         - name: Run Tests
           run: npm test
-  deploy:   
-    concurrency: test
+  deploy:       
     runs-on: ubuntu-latest
     needs: test
     steps:
